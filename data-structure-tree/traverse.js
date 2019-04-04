@@ -52,6 +52,7 @@ const postOrderTraverse = r => {
 preOrderTraverse(root);
 inOrderTraverse(root);
 postOrderTraverse(root);
+
 console.log(...preOrderList);
 console.log(...inOrderList);
 console.log(...postOrderList);
