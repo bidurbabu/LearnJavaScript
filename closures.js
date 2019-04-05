@@ -21,4 +21,4 @@ console.log(add());
 console.log(add());
 
 //A closure is a function having access to the parent scope, even after the parent function has closed.
-//this provides way for fuctions to have private data.
+//this provides way for functions to have private data.
