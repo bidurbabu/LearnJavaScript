@@ -138,3 +138,28 @@ function permutator(inputArr) {
 
   return permute(inputArr);
 }
+
+/**
+ * @param {number[]} height
+ * @return {number}
+ */
+var maxArea = function(height) {
+  var i = 0;
+  var j = height.length;
+  var maxArea = 0;
+    while(i<j){
+      var currentMin = height[i] < height[j] ? height[i]: height[j];
+      var currentArea = currentMin * (j-i);
+      if(currentArea > maxArea){
+        maxArea = currentArea;
+      }
+      if(height[i] < height[j]){
+        i++;
+      } else {
+        j--;
+      }
+    }
+    return maxArea;
+};
+var height = [1,8,6,2,5,4,8,3,7];
+console.log(maxArea(height));
