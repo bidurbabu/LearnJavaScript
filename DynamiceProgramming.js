@@ -1,3 +1,20 @@
+const DFib = n => {
+  if (n <= 1) return 1;
+  const map = {
+    1: 1,
+    2: 2,
+    3: 3,
+    4: 5
+  };
+  const RFib = n => {
+    if (!map[n]) {
+      map[n] = RFib(n - 1) + RFib(n - 2);
+    }
+    return map[n];
+  };
+  return RFib(n);
+};
+console.log(DFib(5));
 /*
 Given an integer array nums, find the contiguous subarray (containing at least one number) which has the largest sum and return its sum.
 
@@ -120,4 +137,44 @@ const robDynamic = nums => {
   }
   return mdc > mc ? mdc : mc;
 };
-console.log(robDynamic([2, 1, 1, 2]));
+
+//Circular house
+var rob = function(nums) {
+  const robDynamic = (start, end) => {
+    var mc = nums[start];
+    var mdc = 0;
+    for (var i = start + 1; i < end; i++) {
+      var pmc = mc;
+      var pMdc = mdc;
+      mc = nums[i] + pMdc;
+      mdc = pmc > pMdc ? pmc : pMdc;
+    }
+    return mdc > mc ? mdc : mc;
+  };
+  if (nums.length === 0) return 0;
+  if (nums.length === 1) return nums[0];
+  const n1 = robDynamic(0, nums.length - 1);
+  const n2 = robDynamic(1, nums.length);
+  return n1 > n2 ? n1 : n2;
+};
+
+/**
+ * @param {number[]} cost
+ * @return {number}
+ */
+var minCostClimbingStairs = function(cost) {
+  if (cost.length <= 1) return 0;
+  if (cost.length === 2) {
+    return Math.min(cost[0], cost[1]);
+  }
+  var c0 = cost[0];
+  var c1 = cost[1];
+  for (var i = 2; i < cost.length; i++) {
+    var onePath = c1 + cost[i];
+    var twoPath = c0 + cost[i];
+    var min = onePath < twoPath ? onePath : twoPath;
+    c0 = c1;
+    c1 = min;
+  }
+  return c0 < c1 ? c0 : c1;
+};
